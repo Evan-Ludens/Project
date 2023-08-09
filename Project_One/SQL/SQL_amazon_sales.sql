@@ -29,11 +29,11 @@ DELETE FROM amazon WHERE rating = '|';
 
 -- Clear data in "discounted_price", "actual_price", "discount_percentage" , 'rating' and 'rating_count' columns so they can be used correclty as number comparing later
 UPDATE amazon
-SET amazon.discounted_price  = CAST(REPLACE(REPLACE(discounted_price,'₹',''),',','') AS DECIMAL(10,2)),
-amazon.actual_price  = CAST(REPLACE(REPLACE(actual_price,'₹',''),',','') AS DECIMAL(10,2)),
-amazon.discount_percentage  = CAST(REPLACE(discount_percentage,'%','')/100 AS DECIMAL(10,2)),
-amazon.rating = CAST(rating AS DECIMAL(10,1)),
-amazon.rating_count = REPLACE(amazon.rating_count,',','');
+SET discounted_price  = CAST(REPLACE(REPLACE(discounted_price,'₹',''),',','') AS DECIMAL(10,2)),
+actual_price  = CAST(REPLACE(REPLACE(actual_price,'₹',''),',','') AS DECIMAL(10,2)),
+discount_percentage  = CAST(REPLACE(discount_percentage,'%','')/100 AS DECIMAL(10,2)),
+rating = CAST(rating AS DECIMAL(10,1)),
+rating_count = REPLACE(rating_count,',','');
 
 -- Clear data in 'category' columns to keep only main categorires and its sub catergories
 ALTER TABLE amazon
